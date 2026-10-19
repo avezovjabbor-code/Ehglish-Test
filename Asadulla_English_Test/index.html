@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asadulla — English Beginner Test & IELTS Band Evaluator</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Boshlang'ich darajadagi o'quvchilar uchun 20 ta savolli 30 soniyalik test va IELTS natijasini aniqlash tizimi. Muallif: Asadulla">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    <div class="particles" id="particles"></div>
+
+    <div class="app-container">
+        <!-- Top Navigation / Header -->
+        <div class="top-nav">
+            <div class="brand">
+                <span class="brand-logo">🎓</span>
+                <span class="brand-name">Asadulla <span>English</span></span>
+            </div>
+            <div class="top-actions">
+                <button class="icon-btn" id="sound-toggle" title="Ovozni yoqish/o'chirish">🔊</button>
+            </div>
+        </div>
+
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen">
+            <div class="header">
+                <div class="mascot-wrapper">
+                    <img src="assets/owl_mascot.jpg" alt="Asadulla Owl Mascot" class="header-mascot">
+                    <span class="mascot-badge">IELTS Beginner</span>
+                </div>
+                <h1>Asadulla English Test</h1>
+                <p class="subtitle">Boshlang'ich darajadagilar uchun 20 ta savolli maxsus test va rasmiy IELTS ball baholagich</p>
+            </div>
+
+            <!-- Student Profile Card -->
+            <div class="profile-card">
+                <div class="profile-input-group">
+                    <label for="student-name-input">👤 O'quvchi ismi:</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="student-name-input" placeholder="Ismingizni kiriting..." value="Asadulla">
+                        <button id="save-name-btn" class="mini-btn">Saqlash</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value" id="total-score">0</div>
+                    <div class="stat-label">Umumiy Ball</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="best-band">-.-</div>
+                    <div class="stat-label">Eng Yuqori IELTS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="quizzes-taken">0</div>
+                    <div class="stat-label">Yechilgan Testlar</div>
+                </div>
+            </div>
+
+            <!-- Featured 20-Question 30s IELTS Banner -->
+            <div class="featured-banner" onclick="startFeaturedIelts()">
+                <div class="banner-badge">🔥 ASOSIY TEST (20 TA SAVOL)</div>
+                <div class="banner-content">
+                    <div class="banner-icon">🎯</div>
+                    <div class="banner-text">
+                        <h3>20 ta Test + 30 Sekund (IELTS Baholash)</h3>
+                        <p>Har bir savol uchun 30 soniya beriladi. Test tugagach rasmiy IELTS sertifikatingizni oling!</p>
+                        <div class="banner-tags">
+                            <span class="tag">⏱️ 30s / Savol</span>
+                            <span class="tag">📝 20 ta Savol</span>
+                            <span class="tag">🏆 IELTS Band 1.0 - 9.0</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="banner-start-btn">Boshlash ➔</button>
+            </div>
+
+            <h2 class="section-title"><span class="icon">📚</span> Barcha Test Bo'limlari</h2>
+            <div class="categories-grid" id="categories-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen hidden">
+            <div class="quiz-header">
+                <button class="back-btn" id="back-btn">
+                    <span>←</span> Chiqish
+                </button>
+                <div class="quiz-category-info">
+                    <span class="quiz-category-name" id="quiz-category-name">IELTS Beginner 20 Test</span>
+                    <span class="quiz-student-tag" id="quiz-student-tag">O'quvchi: Asadulla</span>
+                </div>
+                <div class="timer-box" id="timer-box">
+                    <div class="timer-icon">⏱️</div>
+                    <div class="timer-text" id="time-left">30s</div>
+                </div>
+            </div>
+
+            <!-- Visual countdown bar for 30s -->
+            <div class="timer-progress-track">
+                <div class="timer-progress-fill" id="timer-progress-fill" style="width: 100%;"></div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span class="progress-text">Savol <strong id="current-q-num">1</strong> / <span id="total-q-num">20</span></span>
+                    <span class="score-live-badge">To'g'ri: <strong id="live-correct-count">0</strong></span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progress-bar" style="width: 5%;"></div>
+                </div>
+            </div>
+
+            <div class="question-card" id="question-card">
+                <div class="question-meta">
+                    <span class="question-number" id="question-label">Savol #1</span>
+                    <span class="question-topic-pill" id="question-topic-pill">Grammar & Vocab</span>
+                </div>
+                
+                <div class="question-text" id="question-text">Savol yuklanmoqda...</div>
+                
+                <div class="options-list" id="options-list">
+                    <!-- Options injected here -->
+                </div>
+
+                <div id="feedback-container" class="feedback-box hidden">
+                    <!-- Feedback details -->
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="skip-btn" id="skip-btn">O'tkazib yuborish ↷</button>
+                    <button class="next-btn hidden" id="next-btn">Keyingi Savol ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results & IELTS Certificate Screen -->
+        <div id="results-screen" class="screen hidden">
+            <div class="results-card">
+                <div class="results-emoji" id="results-emoji">🎉</div>
+                <h2 class="results-title" id="results-title">Test Yakunlandi!</h2>
+                <p class="results-subtitle" id="results-message">Ajoyib natija, Asadulla!</p>
+
+                <!-- IELTS Band Display Card -->
+                <div class="ielts-score-badge-card" id="ielts-score-badge-card">
+                    <div class="band-header">
+                        <span class="band-logo-text">IELTS Official Evaluation</span>
+                        <span class="cefr-pill" id="cefr-level">CEFR: A1</span>
+                    </div>
+                    <div class="band-main">
+                        <div class="band-score-number" id="ielts-band">6.5</div>
+                        <div class="band-text-meta">
+                            <span class="band-title-label">Overall Band Score</span>
+                            <span class="band-descriptor" id="band-descriptor">Competent English User</span>
+                        </div>
+                    </div>
+                    <p class="band-comment" id="band-comment">Boshlang'ich darajadagi 20 ta savolli test bo'yicha hisoblandi.</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="results-stats">
+                    <div class="result-stat correct">
+                        <div class="rs-value" id="correct-count">0</div>
+                        <div class="rs-label">To'g'ri Javob</div>
+                    </div>
+                    <div class="result-stat wrong">
+                        <div class="rs-value" id="wrong-count">0</div>
+                        <div class="rs-label">Xato Javob</div>
+                    </div>
+                    <div class="result-stat percent">
+                        <div class="rs-value" id="percentage-score">0%</div>
+                        <div class="rs-label">Aniqlik</div>
+                    </div>
+                    <div class="result-stat time">
+                        <div class="rs-value" id="time-spent">0s</div>
+                        <div class="rs-label">Vaqt Sarflandi</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="results-actions">
+                    <button class="btn-cert" id="view-cert-btn">📜 Sertifikatni Ko'rish & Yuklash</button>
+                    <button class="btn-primary" id="retry-btn">🔄 Qaytadan Yechish</button>
+                    <button class="btn-secondary" id="review-answers-btn">📋 Javoblarni Tahlil Qilish</button>
+                    <button class="btn-outline" id="home-btn">🏠 Asosiy Menyuga Qaytish</button>
+                </div>
+
+                <!-- Question Breakdown Accordion / List -->
+                <div id="review-container" class="review-container hidden">
+                    <h3 class="review-heading">📝 20 ta Savolning To'liq Tahlili</h3>
+                    <div id="review-list" class="review-list">
+                        <!-- Injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Official IELTS Certificate Modal / Container -->
+        <div id="certificate-modal" class="cert-modal hidden">
+            <div class="cert-modal-backdrop" onclick="closeCertModal()"></div>
+            <div class="cert-modal-dialog">
+                <button class="cert-close-btn" onclick="closeCertModal()">✕</button>
+                
+                <div class="certificate-container" id="printable-certificate">
+                    <div class="cert-border-outer">
+                        <div class="cert-border-inner">
+                            <div class="cert-header">
+                                <div class="cert-emblem">🏆</div>
+                                <div class="cert-header-titles">
+                                    <span class="cert-super-title">ASADULLA ENGLISH ACADEMY</span>
+                                    <h2 class="cert-main-title">IELTS TEST REPORT FORM</h2>
+                                    <span class="cert-sub-title">Certificate of English Proficiency</span>
+                                </div>
+                            </div>
+
+                            <div class="cert-body">
+                                <p class="cert-presents">Ushbu sertifikat tasdiqlaydi:</p>
+                                <h1 class="cert-candidate-name" id="cert-name">ASADULLA</h1>
+                                <p class="cert-desc">Boshlang'ich ingliz tili bo'yicha 20 ta savolli tezkor testni muvaffaqiyatli topshirdi va quyidagi darajaga erishdi:</p>
+
+                                <div class="cert-scores-box">
+                                    <div class="cert-score-item highlight">
+                                        <span class="cs-label">OVERALL BAND</span>
+                                        <span class="cs-val" id="cert-band">7.5</span>
+                                    </div>
+                                    <div class="cert-score-item">
+                                        <span class="cs-label">CEFR LEVEL</span>
+                                        <span class="cs-val" id="cert-cefr">B2</span>
+                                    </div>
+                                    <div class="cert-score-item">
+                                        <span class="cs-label">TO'G'RI JAVOBLAR</span>
+                                        <span class="cs-val" id="cert-accuracy">18 / 20</span>
+                                    </div>
+                                    <div class="cert-score-item">
+                                        <span class="cs-label">STATUS</span>
+                                        <span class="cs-val text-success">TASDIQLANGAN</span>
+                                    </div>
+                                </div>
+
+                                <div class="cert-footer">
+                                    <div class="cert-seal">
+                                        <div class="seal-circle">
+                                            <span>ASADULLA</span>
+                                            <span class="seal-star">★ VERIFIED ★</span>
+                                            <span>ENGLISH 2026</span>
+                                        </div>
+                                    </div>
+                                    <div class="cert-meta-info">
+                                        <p><strong>Sana:</strong> <span id="cert-date">07.10.2026</span></p>
+                                        <p><strong>Sertifikat ID:</strong> <span id="cert-id">ASD-89241</span></p>
+                                        <p><strong>Muallif:</strong> Asadulla English Academy</p>
+                                    </div>
+                                    <div class="cert-signature-block">
+                                        <div class="signature-line">Asadulla M.</div>
+                                        <span class="sig-title">Bosh Examiner & O'qituvchi</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cert-modal-actions">
+                    <button class="btn-primary" onclick="window.print()">🖨️ Sertifikatni Chop Etish / PDF Saqlash</button>
+                    <button class="btn-secondary" onclick="closeCertModal()">Yopish</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Dastur muallifi: <strong>Asadulla</strong> | Ingliz tili test tizimi & IELTS Baholagich &copy; 2026</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
